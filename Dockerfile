@@ -15,5 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy app code
 COPY . .
 
+RUN chmod +x wait-for-db.sh
+
 EXPOSE 5002
 CMD ["python", "app.py"]
