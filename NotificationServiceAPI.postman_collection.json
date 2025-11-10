@@ -1,0 +1,86 @@
+{
+  "info": {
+    "name": "Notification Service API",
+    "_postman_id": "a57c9b9c-93c7-4abf-8a6a-fbbd8eec3d41",
+    "description": "Postman collection for the Flask-based Notification Service.\nHandles transaction notifications by sending emails and logging delivery status.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Notify Transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customer_id\": 1,\n  \"account_id\": \"ACC12345\",\n  \"txn_id\": \"TXN98765\",\n  \"reference\": \"REF123ABC\",\n  \"status\": \"success\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5002/notify",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5002",
+          "path": ["notify"]
+        },
+        "description": "Send a transaction notification to a customer. This will trigger an email and log the result in the database."
+      },
+      "response": [
+        {
+          "name": "200 OK - Notification Sent",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": 1,\n  \"account_id\": \"ACC12345\",\n  \"txn_id\": \"TXN98765\",\n  \"reference\": \"REF123ABC\",\n  \"status\": \"success\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5002/notify",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5002",
+              "path": ["notify"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Notification sent successfully\"\n}"
+        },
+        {
+          "name": "400 Bad Request - Missing Fields",
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"error\": \"Missing required fields\"\n}"
+        },
+        {
+          "name": "500 Internal Server Error - Email Failure",
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"error\": \"Failed to send email\"\n}"
+        }
+      ]
+    }
+  ],
+  "variable": []
+}
