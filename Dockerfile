@@ -22,5 +22,3 @@ RUN sed -i 's/\r$//' wait-for-db.sh \
  
 EXPOSE 5002
 CMD ["python", "app.py"]
- 
-This is the docker file for notification service
